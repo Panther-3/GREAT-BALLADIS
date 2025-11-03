@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Building2, Users, Award, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
+import Slider from 'react-slick'; 
 const Home = () => {
   const stats = [
     { icon: Building2, value: '500+', label: 'Projects Completed' },
@@ -18,6 +18,26 @@ const Home = () => {
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
     transition: { duration: 0.6 }
+  };
+ // Slider images
+  const sliderImages = [
+    "https://images.unsplash.com/photo-1654302861319-849671c254cf",
+   "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=1200&q=60&auto=format&fit=crop",
+   "https://images.unsplash.com/photo-1654302861319-849671c254cf",
+  "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&q=60&auto=format&fit=crop",
+    
+  ];
+
+  // Slider settings
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2500,
+    arrows: true, 
   };
 
   return (
@@ -33,8 +53,8 @@ const Home = () => {
             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHptMC0xMGMwLTIuMjEtMS43OS00LTQtNHMtNCAxLjc5LTQgNCAxLjc5IDQgNCA0IDQtMS43OSA0LTR6TTI2IDM0YzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHptMC0xMGMwLTIuMjEtMS43OS00LTQtNHMtNCAxLjc5LTQgNCAxLjc5IDQgNCA0IDQtMS43OSA0LTR6bTAtMTBjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00ek0xNiAzNGMwLTIuMjEtMS43OS00LTQtNHMtNCAxLjc5LTQgNCAxLjc5IDQgNCA0IDQtMS43OSA0LTR6bTAtMTBjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==')]"></div>
           </div>
           
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="container mx-auto px-4 relative z-10 overflow-hidden">
+            <div className="grid lg:grid-cols-2 gap-6 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -60 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -49,25 +69,41 @@ const Home = () => {
                 <div className="flex flex-wrap gap-4">
                   <Link to="/contact">
                     <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white group">
-                      Get a Quote
+                      Contact Us
                       <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
                   <Link to="/gallery/projects">
-                    <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
+                    <Button size="lg" variant="outline" className="border-white text-black hover:bg-red hover:text-red">
                       View Projects
                     </Button>
                   </Link>
                 </div>
               </motion.div>
 
+            {/* Image Slider */}
               <motion.div
                 initial={{ opacity: 0, x: 60 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative"
+                className="relative overflow-hidden w-full"
               >
-                <img className="rounded-2xl shadow-2xl w-full" alt="Modern construction site with workers and equipment" src="https://images.unsplash.com/photo-1654302861319-849671c254cf" />
+                <Slider {...sliderSettings}>
+                  {sliderImages.map((image, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: 60 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                    >
+                      <img
+                        className="rounded-2xl shadow-2xl w-full h-full object-cover"
+                        alt={`Construction site ${index + 1}`}
+                        src={image}
+                      />
+                    </motion.div>
+                  ))}
+                </Slider>
               </motion.div>
             </div>
           </div>
@@ -144,7 +180,7 @@ const Home = () => {
           </div>
         </section>
 
-        <section className="py-20 bg-black text-white">
+        <section className="py-20 bg-gray-300 text-white">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <motion.div {...fadeInUp}>
@@ -157,10 +193,10 @@ const Home = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                <h2 className="text-4xl md:text-5xl text-black font-bold mb-6">
                   Ready to Start Your <span className="text-gradient">Project?</span>
                 </h2>
-                <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+                <p className="text-xl text-black mb-8 leading-relaxed">
                   Let's discuss how we can bring your construction vision to life with our expertise and dedication.
                 </p>
                 <Link to="/contact">

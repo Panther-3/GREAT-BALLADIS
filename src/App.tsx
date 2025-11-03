@@ -12,6 +12,8 @@ import EquipmentGallery from '@/pages/EquipmentGallery';
 import ProjectList from '@/pages/ProjectList';
 import AdminLogin from '@/pages/AdminLogin';
 import AdminDashboard from '@/pages/AdminDashboard';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   return (
