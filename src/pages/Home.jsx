@@ -113,7 +113,7 @@ const Home = () => {
           <div className="container mx-auto px-4">
             <motion.div {...fadeInUp} className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
-                Why Choose <span className="text-gradient">Great Baladis</span>
+                Why Choose <span className="text-gradient">Great Baladis</span> ?
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 We combine expertise, innovation, and dedication to deliver construction excellence that exceeds expectations.
