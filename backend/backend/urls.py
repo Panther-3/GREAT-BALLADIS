@@ -18,11 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
+
 urlpatterns = [
+    # Admin panel
     path('admin/', admin.site.urls),
-    # token endpoints (POST username/password -> access+refresh)
+    
+    # JWT token endpoints for obtaining and refreshing tokens
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    # your api app endpoints
-    path('api/', include('great_balladis.urls')),
+    
+    # API routes for your app (protected and other views)
+    path('api/', include('great_balladis.urls')),  # Include URLs from your app
 ]
