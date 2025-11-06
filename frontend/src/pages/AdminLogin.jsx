@@ -1,4 +1,3 @@
-// src/pages/AdminLogin.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -8,13 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import { useAuth } from "@/auth/AuthProvider";
+import { useAuth } from "@/auth/AuthProvider"; // Importing Auth context for login and session management
 
 /**
- * AdminLogin
- * - Uses centralized AuthProvider
- * - Redirects to dashboard if already authenticated
- * - Shows inline error + toast on failure
+ * AdminLogin Component
+ * - Handles login via backend authentication
+ * - Stores tokens in localStorage upon successful login
+ * - Redirects to the requested page after login
+ * - Displays inline error messages and toast on failure
  */
 
 const AdminLogin = () => {
@@ -24,40 +24,42 @@ const AdminLogin = () => {
   const { login, isAuthenticated, loading: authLoading } = useAuth();
 
   const [credentials, setCredentials] = useState({ username: "", password: "" });
-  const [loading, setLoading] = useState(false); // local loading for form submit
+  const [loading, setLoading] = useState(false); // Local loading for form submit
   const [error, setError] = useState(null);
   const userRef = useRef(null);
 
-  // redirect to intended page after login (if provided in query ?next=/path)
+  // Redirect to intended page after login (if provided in query ?next=/path)
   const params = new URLSearchParams(location.search);
   const nextPath = params.get("next") || "/admin/dashboard";
 
-  // if already authenticated, redirect immediately
+  // Redirect immediately if already authenticated
   useEffect(() => {
     if (!authLoading && isAuthenticated) {
-      navigate(nextPath, { replace: true });
+      if (location.pathname !== nextPath) {
+        navigate(nextPath, { replace: true });
+      }
     }
-  }, [authLoading, isAuthenticated, navigate, nextPath]);
+  }, [authLoading, isAuthenticated, navigate, nextPath, location.pathname]);
 
-  // focus username input for faster UX
+  // Focus username input for better UX
   useEffect(() => {
     userRef.current?.focus();
   }, []);
 
-  // cleanup error on unmount
+  // Cleanup error on unmount
   useEffect(() => {
     return () => setError(null);
   }, []);
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
 
-    const username = credentials.username.trim();
-    const password = credentials.password;
+    const { username, password } = credentials;
 
-    if (!username || !password) {
+    if (!username.trim() || !password) {
       setError("Please enter both username and password.");
       setLoading(false);
       return;
@@ -65,12 +67,19 @@ const AdminLogin = () => {
 
     try {
       await login(username, password);
-      toast({ title: "Login Successful! 🎉", description: `Welcome back, ${username}.` });
+      toast({
+        title: "Login Successful! 🎉",
+        description: `Welcome back, ${username}.`,
+      });
       navigate(nextPath, { replace: true });
     } catch (err) {
       const msg = err?.message || "Invalid username or password.";
       setError(msg);
-      toast({ title: "Login Failed", description: msg, variant: "destructive" });
+      toast({
+        title: "Login Failed",
+        description: msg,
+        variant: "destructive",
+      });
     } finally {
       setLoading(false);
     }
@@ -134,7 +143,7 @@ const AdminLogin = () => {
               />
             </div>
 
-            {/* inline error message */}
+            {/* Inline error message */}
             {error && (
               <div id="login-error" role="alert" className="text-sm text-red-700 bg-red-50 p-2 rounded">
                 {error}
