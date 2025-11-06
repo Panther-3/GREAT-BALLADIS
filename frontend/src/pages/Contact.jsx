@@ -76,7 +76,7 @@ const Contact = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Full Name"
+                      placeholder="John Doe"
                       required
                       className="mt-2"
                     />
@@ -90,7 +90,7 @@ const Contact = () => {
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="name@gmail.com"
+                      placeholder="john@example.com"
                       required
                       className="mt-2"
                     />
@@ -104,7 +104,7 @@ const Contact = () => {
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="0245748390"
+                      placeholder="+1 (555) 123-4567"
                       required
                       className="mt-2"
                     />
@@ -145,7 +145,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-black mb-1">Address</h3>
-                      <p className="text-gray-600">P.O.BOX 9, SUSUANSO <br />AHAFO REGION</p>
+                      <p className="text-gray-600">123 Construction Avenue<br />Business District, City 12345</p>
                     </div>
                   </div>
 
@@ -155,7 +155,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-black mb-1">Phone</h3>
-                      <p className="text-gray-600">0245748390 / 0204188328</p>
+                      <p className="text-gray-600">+1 (555) 123-4567</p>
                     </div>
                   </div>
 
@@ -165,7 +165,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-black mb-1">Email</h3>
-                      <p className="text-gray-600">greatbaladislimited@gmail.com</p>
+                      <p className="text-gray-600">info@greatbaladis.com</p>
                     </div>
                   </div>
                 </div>

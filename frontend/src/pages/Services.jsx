@@ -153,13 +153,13 @@ const Services = () => {
           </div>
         </section>
 
-        <section className="py-20 bg-gray-200 text-white">
+        <section className="py-20 bg-black text-white">
           <div className="container mx-auto px-4 text-center">
             <motion.div {...fadeInUp}>
-              <h2 className="text-4xl md:text-5xl text-black font-bold mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 Ready to Get <span className="text-gradient">Started?</span>
               </h2>
-              <p className="text-xl text-black mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                 Contact us today to discuss your construction project and receive a customized solution.
               </p>
               <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white">
