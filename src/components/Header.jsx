@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import LOGO from '@/assets/LOGO_Great2.png'
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,8 +24,8 @@ const Header = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
     { name: 'Services', path: '/services' },
+    { name: 'About Us', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -36,17 +36,18 @@ const Header = () => {
   ];
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/95 backdrop-blur-md shadow-lg' : 'bg-black/80'}`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[#001f3d] backdrop-blur-md shadow-lg' : 'bg-[#001f3d]'}`}>
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
+            <img src= {LOGO} alt="" className="w-10 h-10 object-contain" />
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-2xl font-bold"
+              className="text-xl font-bold"
             >
-              <span className="text-white">Great Baladis</span>
-              <span className="text-red-600"> Limited</span>
+              <span className="text-white"><span className=" text-red-600">Great</span>Baladis</span>
+              <p className="text-xs text-white">Limited</p>
             </motion.div>
           </Link>
 
